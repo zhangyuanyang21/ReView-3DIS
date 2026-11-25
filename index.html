@@ -10,263 +10,393 @@
 <meta property="og:image" content="static/images/teaser.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Code+Pro:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink: #1d1f23;
-  --muted: #5b6270;
-  --accent: #2a4bb0;
-  --accent-soft: #eef2fb;
-  --rule: #e3e6ec;
-  --bg: #ffffff;
-  --panel: #f7f8fa;
-  --best: #2a4bb0;
+  --ink: #111827;
+  --body: #374151;
+  --muted: #6b7280;
+  --accent: #2f54d6;
+  --accent-2: #7c3aed;
+  --accent-soft: #eef2ff;
+  --line: #e5e7eb;
+  --band: #f8fafc;
+  --card: #ffffff;
+  --shadow: 0 1px 2px rgba(17,24,39,.04), 0 8px 24px rgba(17,24,39,.06);
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
 body {
-  margin: 0; background: var(--bg); color: var(--ink);
-  font-family: "Source Sans 3", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 18px; line-height: 1.6;
+  margin: 0; background: #fff; color: var(--body);
+  font-family: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
 }
-.wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
-header { padding: 64px 0 28px; text-align: center; }
-h1 { font-size: 2.35rem; line-height: 1.2; margin: 0 0 22px; font-weight: 700; letter-spacing: -0.01em; }
-h1 .name { color: var(--accent); }
-.authors { font-size: 1.18rem; margin: 0 0 6px; }
-.authors span { display: inline-block; margin: 0 12px; white-space: nowrap; }
-.affils { color: var(--muted); font-size: 1rem; margin: 0 0 22px; }
-.affils span { display: inline-block; margin: 0 10px; }
-sup { font-size: 0.7em; }
-.buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 6px; }
+a { color: var(--accent); text-decoration: none; }
+.container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+.text { max-width: 780px; margin: 0 auto; }
+
+/* top nav */
+nav.top {
+  position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.85);
+  backdrop-filter: saturate(180%) blur(10px); -webkit-backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+nav.top .container { display: flex; align-items: center; justify-content: space-between; height: 54px; gap: 16px; }
+nav.top .brand { font-weight: 800; color: var(--ink); letter-spacing: -.01em; }
+nav.top .links { display: flex; gap: 22px; overflow-x: auto; scrollbar-width: none; }
+nav.top .links a { color: var(--muted); font-size: 14.5px; font-weight: 500; white-space: nowrap; }
+nav.top .links a:hover { color: var(--ink); }
+
+/* hero */
+.hero {
+  text-align: center; padding: 72px 0 56px;
+  background:
+    radial-gradient(1000px 360px at 50% -40px, rgba(47,84,214,.10), transparent 70%),
+    radial-gradient(700px 300px at 85% 10%, rgba(124,58,237,.07), transparent 70%);
+}
+.hero h1 {
+  color: var(--ink); font-size: 44px; line-height: 1.18; font-weight: 800; letter-spacing: -.025em;
+  margin: 0 auto 26px; max-width: 900px;
+}
+.hero h1 .name {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.authors { font-size: 18.5px; color: var(--ink); font-weight: 500; margin: 0 0 8px; }
+.authors span { display: inline-block; margin: 0 14px; white-space: nowrap; }
+.affils { color: var(--muted); font-size: 15px; margin: 0 0 30px; }
+.affils span { display: inline-block; margin: 2px 12px; }
+sup { font-size: .68em; }
+.buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 .btn {
-  display: inline-flex; align-items: center; gap: 8px; padding: 9px 20px; border-radius: 999px;
-  background: var(--ink); color: #fff; text-decoration: none; font-weight: 600; font-size: 1rem;
+  display: inline-flex; align-items: center; gap: 9px; height: 44px; padding: 0 20px; border-radius: 999px;
+  font-weight: 600; font-size: 15px; border: 1px solid transparent; transition: transform .15s, box-shadow .15s;
 }
-.btn:hover { background: #3a3f49; }
-.btn.soon { background: #c9ced8; color: #3d424c; cursor: default; }
 .btn svg { width: 18px; height: 18px; fill: currentColor; }
-section { padding: 30px 0; }
-h2 { font-size: 1.6rem; margin: 0 0 16px; text-align: center; font-weight: 700; }
+.btn.primary { background: var(--ink); color: #fff; box-shadow: 0 6px 16px rgba(17,24,39,.18); }
+.btn.primary:hover { transform: translateY(-1px); }
+.btn.soon { background: #fff; color: var(--body); border-color: var(--line); cursor: default; }
+.btn .tag {
+  font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--accent); background: var(--accent-soft); padding: 2px 8px; border-radius: 999px;
+}
+
+/* sections */
+section { padding: 72px 0; }
+section.band { background: var(--band); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.eyebrow {
+  display: block; text-align: center; color: var(--accent); font-size: 13px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px;
+}
+h2 { color: var(--ink); text-align: center; font-size: 32px; font-weight: 800; letter-spacing: -.02em; margin: 0 0 34px; line-height: 1.25; }
+h3 { color: var(--ink); }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 18px; }
 figure { margin: 0; }
-figure img, figure video { width: 100%; height: auto; display: block; border-radius: 6px; }
-figcaption { color: var(--muted); font-size: 0.95rem; margin-top: 10px; line-height: 1.5; }
-.narrow { max-width: 760px; margin: 0 auto; }
-.abstract p { text-align: justify; margin: 0; }
-.tldr { background: var(--accent-soft); border-radius: 8px; padding: 14px 20px; margin: 22px auto 0; max-width: 760px; font-size: 1.02rem; }
+figure img, figure video { width: 100%; height: auto; display: block; border-radius: 10px; }
+figcaption { color: var(--muted); font-size: 14.5px; line-height: 1.6; margin: 14px 4px 0; }
+figcaption b { color: var(--body); }
+.video-card { padding: 10px; background: #0b0f19; border-color: #0b0f19; }
+.video-card video { width: 100%; height: auto; display: block; border-radius: 10px; background: #0b0f19; }
+.under { max-width: 900px; margin: 14px auto 0; text-align: center; }
+
+/* abstract */
+.tldr {
+  border-left: 4px solid var(--accent); background: var(--accent-soft); border-radius: 0 12px 12px 0;
+  padding: 16px 20px; color: var(--ink); font-size: 16.5px; margin: 0 0 28px;
+}
 .tldr b { color: var(--accent); }
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; }
-.step { background: var(--panel); border-radius: 8px; padding: 16px 18px; }
-.step h3 { margin: 0 0 6px; font-size: 1.08rem; color: var(--accent); }
-.step p { margin: 0; font-size: 0.97rem; color: #33373f; }
+.abstract p { margin: 0; text-align: justify; hyphens: auto; }
+
+/* stats */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
+.stat { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 22px 22px 18px; box-shadow: var(--shadow); }
+.stat .num { font-size: 34px; font-weight: 800; letter-spacing: -.02em; color: var(--ink); line-height: 1.1; }
+.stat .num small { font-size: 17px; font-weight: 600; color: var(--muted); }
+.stat .lbl { margin-top: 8px; font-size: 14.5px; color: var(--muted); line-height: 1.5; }
+.stat .num .up { color: var(--accent); }
+
+/* method */
+.teaser { max-width: 820px; margin: 0 auto 56px; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
+.step { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); }
+.step .n {
+  width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; font-weight: 700; font-size: 15px;
+  color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); margin-bottom: 12px;
+}
+.step h3 { margin: 0 0 6px; font-size: 17px; font-weight: 700; }
+.step p { margin: 0; font-size: 15px; color: var(--muted); line-height: 1.6; }
+
+/* table */
+.table-card { padding: 6px 0 0; overflow: hidden; }
 .table-wrap { overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; font-size: 0.97rem; min-width: 640px; }
-th, td { padding: 7px 10px; text-align: center; white-space: nowrap; }
-thead th { border-bottom: 1px solid var(--ink); font-weight: 600; }
-thead tr:first-child th { border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule); }
-td:first-child, th:first-child { text-align: left; }
-tbody tr.group td { border-top: 1px solid #b9bec8; }
-tbody tr:last-child td { border-bottom: 2px solid var(--ink); }
-tr.ours td { background: var(--accent-soft); }
-.b { font-weight: 700; color: var(--best); }
-.u { text-decoration: underline; text-underline-offset: 3px; }
-.sep { border-left: 1px solid var(--rule); }
-.note { color: var(--muted); font-size: 0.88rem; margin-top: 10px; line-height: 1.5; }
-pre {
-  background: var(--panel); border-radius: 8px; padding: 16px 18px; overflow-x: auto;
-  font-family: "Source Code Pro", Menlo, monospace; font-size: 0.86rem; line-height: 1.5; margin: 0;
-}
+table { border-collapse: collapse; width: 100%; font-size: 15px; min-width: 700px; font-variant-numeric: tabular-nums; }
+th, td { padding: 11px 14px; text-align: center; white-space: nowrap; }
+thead th { color: var(--ink); font-weight: 600; font-size: 14px; }
+thead tr:first-child th { padding-bottom: 4px; }
+thead tr:last-child th { border-bottom: 1px solid var(--line); padding-top: 4px; }
+th.grp { border-bottom: 1px solid var(--line); }
+td:first-child, th:first-child { text-align: left; padding-left: 22px; }
+tbody td { border-bottom: 1px solid #f1f2f4; color: var(--body); }
+tbody tr.gap td { border-top: 1px solid var(--line); }
+tbody tr:last-child td { border-bottom: none; }
+tr.ours td { background: #f5f7ff; color: var(--ink); }
+td.mark { color: var(--muted); }
+.b { font-weight: 700; color: var(--accent); }
+.table-card .b { color: var(--accent); }
+.u { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.sep { border-left: 1px solid var(--line); }
+.note { color: var(--muted); font-size: 13.5px; line-height: 1.6; margin: 16px 4px 0; }
+
+/* gallery */
+.two { display: grid; grid-template-columns: 1fr; gap: 28px; }
+.online { max-width: 760px; margin: 0 auto; }
+
+/* bibtex */
 .bib { position: relative; }
-.copy {
-  position: absolute; top: 10px; right: 10px; border: 1px solid var(--rule); background: #fff;
-  border-radius: 6px; padding: 4px 10px; font: inherit; font-size: 0.85rem; cursor: pointer; color: var(--ink);
+pre {
+  margin: 0; background: #0f172a; color: #e2e8f0; border-radius: 14px; padding: 22px 24px; overflow-x: auto;
+  font-family: "JetBrains Mono", Menlo, monospace; font-size: 13.5px; line-height: 1.65;
 }
-footer { color: var(--muted); font-size: 0.88rem; text-align: center; padding: 30px 0 46px; border-top: 1px solid var(--rule); margin-top: 20px; }
-@media (max-width: 720px) {
-  body { font-size: 17px; }
-  header { padding-top: 40px; }
-  h1 { font-size: 1.7rem; }
-  .steps { grid-template-columns: 1fr; }
+.copy {
+  position: absolute; top: 12px; right: 12px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06);
+  color: #e2e8f0; border-radius: 8px; padding: 5px 12px; font: inherit; font-size: 13px; cursor: pointer;
+}
+.copy:hover { background: rgba(255,255,255,.14); }
+
+footer { text-align: center; color: var(--muted); font-size: 14px; padding: 36px 0 48px; }
+
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .hero { padding: 48px 0 40px; }
+  .hero h1 { font-size: 29px; }
+  .authors { font-size: 16.5px; }
+  section { padding: 52px 0; }
+  h2 { font-size: 26px; margin-bottom: 26px; }
+  .stats, .steps { grid-template-columns: 1fr; }
   .abstract p { text-align: left; }
+  nav.top .brand { display: none; }
+  .card { padding: 12px; }
 }
 </style>
 </head>
 <body>
 
-<header class="wrap">
-  <h1><span class="name">ReView</span>: Online Zero-Shot 3D Instance Segmentation<br>by Revisiting Past Views</h1>
-  <p class="authors">
-    <span>Yuanyang Zhang<sup>1</sup></span>
-    <span>Li Yao<sup>1</sup></span>
-    <span>Yijie Lin<sup>2</sup></span>
-    <span>Xinchao Wang<sup>3</sup></span>
-  </p>
-  <p class="affils">
-    <span><sup>1</sup>Southeast University</span>
-    <span><sup>2</sup>The Hong Kong University of Science and Technology</span>
-    <span><sup>3</sup>National University of Singapore</span>
-  </p>
-  <div class="buttons">
-    <span class="btn soon" title="The arXiv version is being processed">
-      <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6V2zm8 1.5V8h4.5L14 3.5zM8 12h10v1.5H8V12zm0 3.5h10V17H8v-1.5zm0 3.5h7v1.5H8V19z"/></svg>
-      arXiv (coming soon)</span>
-    <span class="btn soon" title="Code will be released in this repository">
-      <svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
-      Code (coming soon)</span>
-    <a class="btn" href="#video">
-      <svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5z"/></svg>
-      Video</a>
+<nav class="top">
+  <div class="container">
+    <a class="brand" href="#">ReView</a>
+    <div class="links">
+      <a href="#video">Video</a>
+      <a href="#abstract">Abstract</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+      <a href="#visuals">Visualizations</a>
+      <a href="#bibtex">BibTeX</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <h1><span class="name">ReView</span>: Online Zero-Shot 3D Instance Segmentation by Revisiting Past Views</h1>
+    <p class="authors">
+      <span>Yuanyang Zhang<sup>1</sup></span>
+      <span>Li Yao<sup>1</sup></span>
+      <span>Yijie Lin<sup>2</sup></span>
+      <span>Xinchao Wang<sup>3</sup></span>
+    </p>
+    <p class="affils">
+      <span><sup>1</sup>Southeast University</span>
+      <span><sup>2</sup>The Hong Kong University of Science and Technology</span>
+      <span><sup>3</sup>National University of Singapore</span>
+    </p>
+    <div class="buttons">
+      <span class="btn soon" title="The arXiv version is being processed">
+        <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6V2zm8 1.5V8h4.5L14 3.5zM8 12h10v1.5H8V12zm0 3.5h10V17H8v-1.5zm0 3.5h7v1.5H8V19z"/></svg>
+        Paper <span class="tag">soon</span></span>
+      <span class="btn soon" title="Code will be released in this repository">
+        <svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        Code <span class="tag">soon</span></span>
+      <a class="btn primary" href="#video">
+        <svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5z"/></svg>
+        Watch video</a>
+    </div>
   </div>
 </header>
 
-<section class="wrap">
-  <figure>
-    <img src="static/images/teaser.png" alt="ReView uses past views to refine and rank online instances">
-    <figcaption><b>ReView uses past views to refine and rank online instances.</b>
-      (a) The TV instance (orange) incorrectly includes points from the plant.
-      (b) Of the 50 voting views that see the plant, only 4 include it in their best-matching 2D masks.
-      (c) View-consensus refinement removes the wrongly included points (red) and adds missing points (blue).
-      (d) The 35 displayed instances, each with at least 800 points, initially have identical scores.
-      (e) Ranking by observation-consistency confidence <i>Q</i> places 10 of the 13 correct instances
-      (indigo, IoU &ge; 0.5 with ground truth) among the top 17. Ground truth is used only to label the bars.</figcaption>
-  </figure>
-  <div class="tldr"><b>TL;DR</b> &nbsp;ReView is a training-free framework that revisits accumulated instances at query time
-    using only past observations. It refines instances, ranks them by observation-consistency confidence and recovers
-    missed objects, without changing the online association process.</div>
-</section>
-
-<section class="wrap abstract">
-  <h2>Abstract</h2>
-  <div class="narrow"><p>
-    Online zero-shot 3D instance segmentation identifies objects during scanning without training on 3D instance
-    annotations. Existing methods incrementally associate 2D masks to build 3D instances. However, segmentation errors
-    and missed instances can persist as observations accumulate. Moreover, some methods assign identical confidence
-    scores to all instances, leaving reliable and unreliable instances indistinguishable. We observe that masks from
-    different past viewpoints can reveal errors in accumulated instances, while their agreement with an instance
-    indicates its reliability. We therefore propose <i>ReView</i>, a training-free framework that revisits accumulated
-    instances at query time using only observations collected so far, without changing the online association process.
-    For each instance, ReView finds the best-matching 2D mask in each valid past view. In <i>view-consensus
-    refinement</i>, these masks provide votes on visible points from views with sufficient agreement, removing wrongly
-    included points and adding missing ones before connectivity cleanup. Reusing the same matches, ReView averages
-    agreement across all valid views to obtain an <i>observation-consistency confidence</i> for ranking instances. To
-    recover missed objects, <i>track-based recovery</i> adds candidates from temporal mask tracks after overlap checks
-    and duplicate suppression. Experiments on ScanNet200 and SceneNN show that ReView achieves the highest AP among the
-    compared online and offline methods.
-  </p></div>
-</section>
-
-<section class="wrap" id="video">
-  <h2>Video</h2>
-  <figure>
-    <video controls preload="metadata" playsinline poster="static/images/video_poster.jpg">
-      <source src="static/videos/ReView_video.mp4" type="video/mp4">
-      Your browser does not support the video tag. <a href="static/videos/ReView_video.mp4">Download the video</a>.
-    </video>
-    <figcaption>Segmentation evolving during scanning on four scans, with the ground truth, OnlineAnySeg and ReView side
-      by side. Each panel uses only the frames observed so far. Matched predictions share ground-truth colours (display
-      only); lighter colours indicate lower confidence. Ground truth is used only for reference, colouring, and scene and
-      example selection.</figcaption>
-  </figure>
-</section>
-
-<section class="wrap">
-  <h2>Method</h2>
-  <figure>
-    <img src="static/images/method.png" alt="Overview of ReView">
-    <figcaption><b>Overview of ReView.</b> (a) The online front end lifts and associates 2D masks to build the instance
-      bank. (b) At query time <i>t</i>, ReView uses only frames <i>f</i> &le; <i>t</i> and their masks:
-      (1) best-matching masks in valid views provide IoU agreement over visible points;
-      (2) views with sufficient agreement vote point-wise to refine instances, followed by connectivity cleanup;
-      (3) mean agreement over all valid views gives the confidence <i>Q</i>;
-      (4) online mask tracks yield recovery seeds, filtered by overlap checks and seed NMS.
-      (c) Refined bank instances score 1 by default, or (1+<i>Q</i>)/2 with optional confidence ranking; recovered
-      seeds rank below all bank instances.</figcaption>
-  </figure>
-  <div class="steps">
-    <div class="step"><h3>View-consensus refinement</h3>
-      <p>Best-matching 2D masks from past views vote on visible points, removing wrongly included points and adding
-        missing ones before connectivity cleanup.</p></div>
-    <div class="step"><h3>Observation-consistency confidence</h3>
-      <p>Reusing the same matches, ReView averages mask agreement across all valid views to rank instances.</p></div>
-    <div class="step"><h3>Track-based recovery</h3>
-      <p>Temporal mask tracks provide candidates for missed objects, admitted after overlap checks and duplicate
-        suppression.</p></div>
+<section id="video" style="padding-top: 8px;">
+  <div class="container">
+    <div class="card video-card">
+      <video controls preload="metadata" playsinline poster="static/images/video_poster.jpg">
+        <source src="static/videos/ReView_video.mp4" type="video/mp4">
+        Your browser does not support the video tag. <a href="static/videos/ReView_video.mp4">Download the video</a>.
+      </video>
+    </div>
+    <p class="under note">Segmentation evolving during scanning on four scans, with the ground truth, OnlineAnySeg and
+      ReView side by side. Each panel uses only the frames observed so far. Matched predictions share ground-truth
+      colours (display only); lighter colours indicate lower confidence. Ground truth is used only for reference,
+      colouring, and scene and example selection.</p>
   </div>
 </section>
 
-<section class="wrap">
-  <h2>Results</h2>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th rowspan="2">Method</th><th rowspan="2">Online</th><th rowspan="2">Zero-shot</th>
-            <th colspan="3" class="sep">ScanNet200</th><th colspan="3" class="sep">SceneNN</th></tr>
-        <tr><th class="sep">AP</th><th>AP<sub>50</sub></th><th>AP<sub>25</sub></th>
-            <th class="sep">AP</th><th>AP<sub>50</sub></th><th>AP<sub>25</sub></th></tr>
-      </thead>
-      <tbody>
-        <tr><td>OVIR-3D<sup>&Dagger;</sup></td><td>&#10007;</td><td>&#10003;</td><td class="sep">14.4</td><td>27.5</td><td>38.8</td><td class="sep">12.3</td><td>24.4</td><td>34.6</td></tr>
-        <tr><td>MaskClustering<sup>&Dagger;</sup></td><td>&#10007;</td><td>&#10003;</td><td class="sep"><span class="u">19.7</span></td><td>36.4</td><td>51.4</td><td class="sep">16.3</td><td>31.7</td><td>46.2</td></tr>
-        <tr class="group"><td>EmbodiedSAM</td><td>&#10003;</td><td>&#10007;</td><td class="sep">14.80</td><td>36.57</td><td class="b">64.43</td><td class="sep">11.18</td><td>30.99</td><td>61.48</td></tr>
-        <tr><td>SAM3D<sup>&dagger;</sup></td><td>&#10003;</td><td>&#10003;</td><td class="sep">9.63</td><td>23.75</td><td>49.85</td><td class="sep">10.05</td><td>23.26</td><td>47.95</td></tr>
-        <tr><td>Stream3D<sup>&sect;</sup></td><td>&#10003;</td><td>&#10003;</td><td class="sep">19.18</td><td>34.31</td><td>53.44</td><td class="sep">16.27</td><td>30.43</td><td>47.25</td></tr>
-        <tr><td>OnlineAnySeg</td><td>&#10003;</td><td>&#10003;</td><td class="sep">18.96</td><td>36.77</td><td>55.63</td><td class="sep">18.12</td><td>36.17</td><td>59.86</td></tr>
-        <tr class="group ours"><td><b>ReView</b> (ours)</td><td>&#10003;</td><td>&#10003;</td><td class="sep b">21.38</td><td class="b">41.05</td><td>62.51</td><td class="sep b">20.75</td><td><span class="u">39.33</span></td><td class="b">62.43</td></tr>
-        <tr class="ours"><td><b>ReView</b> + conf. (ours)</td><td>&#10003;</td><td>&#10003;</td><td class="sep">19.34</td><td><span class="u">40.31</span></td><td><span class="u">63.12</span></td><td class="sep"><span class="u">18.97</span></td><td class="b">39.82</td><td><span class="u">62.06</span></td></tr>
-      </tbody>
-    </table>
+<section id="abstract" class="band">
+  <div class="container">
+    <span class="eyebrow">Overview</span>
+    <h2>Abstract</h2>
+    <div class="text abstract">
+      <div class="tldr"><b>TL;DR</b> &nbsp;ReView is a training-free framework that revisits accumulated instances at
+        query time using only past observations. It refines instances, ranks them by observation-consistency confidence
+        and recovers missed objects, without changing the online association process.</div>
+      <p>
+        Online zero-shot 3D instance segmentation identifies objects during scanning without training on 3D instance
+        annotations. Existing methods incrementally associate 2D masks to build 3D instances. However, segmentation
+        errors and missed instances can persist as observations accumulate. Moreover, some methods assign identical
+        confidence scores to all instances, leaving reliable and unreliable instances indistinguishable. We observe that
+        masks from different past viewpoints can reveal errors in accumulated instances, while their agreement with an
+        instance indicates its reliability. We therefore propose <i>ReView</i>, a training-free framework that revisits
+        accumulated instances at query time using only observations collected so far, without changing the online
+        association process. For each instance, ReView finds the best-matching 2D mask in each valid past view. In
+        <i>view-consensus refinement</i>, these masks provide votes on visible points from views with sufficient
+        agreement, removing wrongly included points and adding missing ones before connectivity cleanup. Reusing the same
+        matches, ReView averages agreement across all valid views to obtain an <i>observation-consistency
+        confidence</i> for ranking instances. To recover missed objects, <i>track-based recovery</i> adds candidates
+        from temporal mask tracks after overlap checks and duplicate suppression. Experiments on ScanNet200 and SceneNN
+        show that ReView achieves the highest AP among the compared online and offline methods.
+      </p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num"><span class="up">+2.42</span> <small>AP</small></div>
+        <div class="lbl">over the OnlineAnySeg front end on ScanNet200 (18.96 &rarr; 21.38), full input</div></div>
+      <div class="stat"><div class="num"><span class="up">+2.63</span> <small>AP</small></div>
+        <div class="lbl">over the OnlineAnySeg front end on SceneNN (18.12 &rarr; 20.75), full input</div></div>
+      <div class="stat"><div class="num">24.50 <small>&rarr;</small> <span class="up">40.64</span></div>
+        <div class="lbl">C-AP<sub>50</sub> on ScanNet200 when instances are ranked by observation-consistency confidence</div></div>
+    </div>
+    <p class="note" style="text-align:center">All numbers: full input, OnlineAnySeg's released evaluation script (Tables 1&ndash;2 of the paper).</p>
   </div>
-  <p class="note"><b>Full-input results</b> with OnlineAnySeg's released evaluation script. Online methods are our reruns on
-    the same input sequences; ReView + conf. ranks the same masks by confidence.
-    &Dagger;: offline, reported by OnlineAnySeg with the same script. &dagger;: SAM3D without its optional
-    over-segmentation ensemble. &sect;: released code with our masks; uses the complete scene mesh and is included only
-    as a full-input reference. <span class="b">Bold</span> / <span class="u">underline</span>: best / second best per
-    column. Results with an alternative evaluation protocol are reported in the paper.</p>
 </section>
 
-<section class="wrap">
-  <h2>Segmentation during scanning</h2>
-  <figure class="narrow">
-    <img src="static/images/online.jpg" alt="Segmentation during scanning">
-    <figcaption><b>Segmentation during scanning</b> on a ScanNet200 scene at 25&ndash;100% input (top view). Predictions are
-      displayed on the observed portion of the ground-truth mesh, with matched instances sharing ground-truth colours and
-      unlabelled surfaces shown in grey. The ground-truth row is restricted to the shared front end's reconstruction for
-      visualization only.</figcaption>
-  </figure>
+<section id="method">
+  <div class="container">
+    <span class="eyebrow">Approach</span>
+    <h2>Revisiting past views at query time</h2>
+    <figure class="teaser">
+      <div class="card"><img src="static/images/teaser.png" alt="ReView uses past views to refine and rank online instances"></div>
+      <figcaption><b>ReView uses past views to refine and rank online instances.</b>
+        (a) The TV instance (orange) incorrectly includes points from the plant.
+        (b) Of the 50 voting views that see the plant, only 4 include it in their best-matching 2D masks.
+        (c) View-consensus refinement removes the wrongly included points (red) and adds missing points (blue).
+        (d) The 35 displayed instances, each with at least 800 points, initially have identical scores.
+        (e) Ranking by observation-consistency confidence <i>Q</i> places 10 of the 13 correct instances
+        (indigo, IoU &ge; 0.5 with ground truth) among the top 17. Ground truth is used only to label the bars.</figcaption>
+    </figure>
+    <figure>
+      <div class="card"><img src="static/images/method.png" alt="Overview of ReView"></div>
+      <figcaption><b>Overview of ReView.</b> (a) The online front end lifts and associates 2D masks to build the instance
+        bank. (b) At query time <i>t</i>, ReView uses only frames <i>f</i> &le; <i>t</i> and their masks:
+        (1) best-matching masks in valid views provide IoU agreement over visible points;
+        (2) views with sufficient agreement vote point-wise to refine instances, followed by connectivity cleanup;
+        (3) mean agreement over all valid views gives the confidence <i>Q</i>;
+        (4) online mask tracks yield recovery seeds, filtered by overlap checks and seed NMS.
+        (c) Refined bank instances score 1 by default, or (1+<i>Q</i>)/2 with optional confidence ranking; recovered
+        seeds rank below all bank instances.</figcaption>
+    </figure>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>View-consensus refinement</h3>
+        <p>Best-matching 2D masks from past views vote on visible points, removing wrongly included points and adding
+          missing ones before connectivity cleanup.</p></div>
+      <div class="step"><div class="n">2</div><h3>Observation-consistency confidence</h3>
+        <p>Reusing the same matches, ReView averages mask agreement across all valid views to rank instances.</p></div>
+      <div class="step"><div class="n">3</div><h3>Track-based recovery</h3>
+        <p>Temporal mask tracks provide candidates for missed objects, admitted after overlap checks and duplicate
+          suppression.</p></div>
+    </div>
+  </div>
 </section>
 
-<section class="wrap">
-  <h2>Full-input comparison</h2>
-  <figure>
-    <img src="static/images/comparison.jpg" alt="Full-input segmentation comparison">
-    <figcaption><b>Full-input segmentation comparison</b> on ScanNet200 and SceneNN scenes (top view, ceiling removed).
-      Predictions are mapped to the ground-truth mesh. Matched predictions share ground-truth colours (Hungarian matching,
-      IoU &ge; 0.25); grey denotes unlabelled surface. Red boxes highlight objects that ReView segments more accurately
-      than either baseline.</figcaption>
-  </figure>
+<section id="results" class="band">
+  <div class="container">
+    <span class="eyebrow">Experiments</span>
+    <h2>Full-input results</h2>
+    <div class="card table-card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th rowspan="2">Method</th><th rowspan="2">Online</th><th rowspan="2">Zero-shot</th>
+                <th colspan="3" class="sep grp">ScanNet200</th><th colspan="3" class="sep grp">SceneNN</th></tr>
+            <tr><th class="sep">AP</th><th>AP<sub>50</sub></th><th>AP<sub>25</sub></th>
+                <th class="sep">AP</th><th>AP<sub>50</sub></th><th>AP<sub>25</sub></th></tr>
+          </thead>
+          <tbody>
+            <tr><td>OVIR-3D<sup>&Dagger;</sup></td><td class="mark">&ndash;</td><td class="mark">&#10003;</td><td class="sep">14.4</td><td>27.5</td><td>38.8</td><td class="sep">12.3</td><td>24.4</td><td>34.6</td></tr>
+            <tr><td>MaskClustering<sup>&Dagger;</sup></td><td class="mark">&ndash;</td><td class="mark">&#10003;</td><td class="sep"><span class="u">19.7</span></td><td>36.4</td><td>51.4</td><td class="sep">16.3</td><td>31.7</td><td>46.2</td></tr>
+            <tr class="gap"><td>EmbodiedSAM</td><td class="mark">&#10003;</td><td class="mark">&ndash;</td><td class="sep">14.80</td><td>36.57</td><td class="b">64.43</td><td class="sep">11.18</td><td>30.99</td><td>61.48</td></tr>
+            <tr><td>SAM3D<sup>&dagger;</sup></td><td class="mark">&#10003;</td><td class="mark">&#10003;</td><td class="sep">9.63</td><td>23.75</td><td>49.85</td><td class="sep">10.05</td><td>23.26</td><td>47.95</td></tr>
+            <tr><td>Stream3D<sup>&sect;</sup></td><td class="mark">&#10003;</td><td class="mark">&#10003;</td><td class="sep">19.18</td><td>34.31</td><td>53.44</td><td class="sep">16.27</td><td>30.43</td><td>47.25</td></tr>
+            <tr><td>OnlineAnySeg</td><td class="mark">&#10003;</td><td class="mark">&#10003;</td><td class="sep">18.96</td><td>36.77</td><td>55.63</td><td class="sep">18.12</td><td>36.17</td><td>59.86</td></tr>
+            <tr class="gap ours"><td><b>ReView</b> (ours)</td><td class="mark">&#10003;</td><td class="mark">&#10003;</td><td class="sep b">21.38</td><td class="b">41.05</td><td>62.51</td><td class="sep b">20.75</td><td><span class="u">39.33</span></td><td class="b">62.43</td></tr>
+            <tr class="ours"><td><b>ReView</b> + conf. (ours)</td><td class="mark">&#10003;</td><td class="mark">&#10003;</td><td class="sep">19.34</td><td><span class="u">40.31</span></td><td><span class="u">63.12</span></td><td class="sep"><span class="u">18.97</span></td><td class="b">39.82</td><td><span class="u">62.06</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="note">Evaluation uses OnlineAnySeg's released script. Online methods are our reruns on the same input
+      sequences; ReView + conf. ranks the same masks by confidence. &Dagger;: offline, reported by OnlineAnySeg with the
+      same script. &dagger;: SAM3D without its optional over-segmentation ensemble. &sect;: released code with our masks;
+      uses the complete scene mesh and is included only as a full-input reference.
+      <span class="b">Bold</span> / <span class="u">underline</span>: best / second best per column. Results with an
+      alternative evaluation protocol are reported in the paper.</p>
+  </div>
 </section>
 
-<section class="wrap">
-  <h2>BibTeX</h2>
-  <div class="bib">
-    <button class="copy" type="button" onclick="copyBib(this)">Copy</button>
-<pre id="bibtex">@article{zhang2026review,
-  title   = {ReView: Online Zero-Shot 3D Instance Segmentation by Revisiting Past Views},
+<section id="visuals">
+  <div class="container">
+    <span class="eyebrow">Qualitative results</span>
+    <h2>Visualizations</h2>
+    <div class="two">
+      <figure class="online">
+        <div class="card"><img src="static/images/online.jpg" alt="Segmentation during scanning"></div>
+        <figcaption><b>Segmentation during scanning</b> on a ScanNet200 scene at 25&ndash;100% input (top view).
+          Predictions are displayed on the observed portion of the ground-truth mesh, with matched instances sharing
+          ground-truth colours and unlabelled surfaces shown in grey. The ground-truth row is restricted to the shared
+          front end's reconstruction for visualization only.</figcaption>
+      </figure>
+      <figure>
+        <div class="card"><img src="static/images/comparison.jpg" alt="Full-input segmentation comparison"></div>
+        <figcaption><b>Full-input segmentation comparison</b> on ScanNet200 and SceneNN scenes (top view, ceiling removed).
+          Predictions are mapped to the ground-truth mesh. Matched predictions share ground-truth colours (Hungarian
+          matching, IoU &ge; 0.25); grey denotes unlabelled surface. Red boxes highlight objects that ReView segments
+          more accurately than either baseline.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="bibtex" class="band">
+  <div class="container text">
+    <span class="eyebrow">Citation</span>
+    <h2>BibTeX</h2>
+    <div class="bib">
+      <button class="copy" type="button" onclick="copyBib(this)">Copy</button>
+<pre id="bibtex-code">@article{zhang2026review,
+  title   = {ReView: Online Zero-Shot 3D Instance Segmentation
+             by Revisiting Past Views},
   author  = {Zhang, Yuanyang and Yao, Li and Lin, Yijie and Wang, Xinchao},
   journal = {arXiv preprint},
   year    = {2026}
 }</pre>
+    </div>
+    <p class="note" style="text-align:center">The arXiv identifier will be added once the preprint is available.</p>
   </div>
-  <p class="note">The arXiv identifier will be added once the preprint is available.</p>
 </section>
 
-<footer class="wrap">
-  Contact: Yuanyang Zhang (zhangyuanyang@seu.edu.cn)
+<footer>
+  <div class="container">Contact: Yuanyang Zhang (<a href="mailto:zhangyuanyang@seu.edu.cn">zhangyuanyang@seu.edu.cn</a>)</div>
 </footer>
 
 <script>
 function copyBib(btn) {
-  var text = document.getElementById('bibtex').innerText;
+  var text = document.getElementById('bibtex-code').innerText;
   var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500); };
   if (navigator.clipboard) { navigator.clipboard.writeText(text).then(done, function () {}); }
 }
